@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-navbar color='dark'>
+        <ion-title>
+            Choose a show
+        </ion-title>
+        <ion-buttons end>
+            <button (click)="confirmPlay()" ion-button icon-only>
+                <ion-icon name="play"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bgcontent" padding>
+    <ion-row>
+        <ion-col col-6>
+            <ion-toolbar color="dark">
+                <ion-title>Trigger:</ion-title>
+            </ion-toolbar>
+            <ion-item padding>
+                <ion-label floating>Trigger:</ion-label>
+                <ion-select [(ngModel)]="nameNumbers" (ionChange)="addTrigger()" multiple>
+                    <ion-option *ngFor="let name of names">{{name}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col col-6>
+            <ion-toolbar color="dark">
+                <ion-title>Delay in sec:</ion-title>
+                <ion-buttons end>
+                    <button (click)="addDelay()" ion-button icon-only>
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-item padding>
+                <ion-label floating>Delay:</ion-label>
+                <ion-input [(ngModel)]="delayList" (keyup.enter)="addDelay()" type="number" step="0.1"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12>
+            <ion-toolbar color="dark">
+                <ion-title>Total: {{timer/1000 | number : '1.1-1'}}</ion-title>
+            </ion-toolbar>
+            <ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
+                <ion-item-sliding *ngFor="let item of items">
+                    <ion-item class="itemstyling">
+                        {{item.type}}
+                        {{ item.type == "Trigger" ? item.data.value : item.data.value/1000 + " sec" }}
+                    </ion-item>
+                    <ion-item-options side="right">
+                        <button (click)="removeItem(item)" clear float-left ion-button icon-only>
+                            <ion-icon name="trash"></ion-icon>
+                        </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+</ion-content>

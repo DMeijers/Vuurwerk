@@ -1,3 +1,14 @@
-page-home {
-
+page-home{
+  .bgcontent{
+    background-image: url("../../assets/imgs/vuurwerk.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .itemstyling{
+    text-align: center;
+    font-size: 24px;
+  }
+  .white{
+    background-color: white;
+  }
 }

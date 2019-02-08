@@ -1,6 +1,8 @@
 {
   "name": "Vuurwerk",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
   "pro_id": "f964c23f"
 }

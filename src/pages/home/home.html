@@ -1,14 +1,75 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color='dark'>
+        <ion-buttons begin>
+            <button ion-button clear icon-end (click)="connectWifi()">
+                Kei Onsteker
+                <ion-icon name="wifi"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="hide ? hideButtons() : !hideButtons()">{{hide ? 'Shows' : 'Buttons'}}
+            </button>
+            <button (click)="goToMyPage()" ion-button icon-only>
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="bgcontent" padding>
+    <ion-row>
+        <ion-col *ngIf="hide" col-12>
+            <ion-toolbar color="dark">
+                <ion-title>Triggers:</ion-title>
+                <ion-buttons end>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let button of buttons; let i = index" col-3>
+                        <button ion-button large full [color]="button.color ? 'primary' : 'secondary'"
+                                (click)="triggerButtons(i)">
+                            {{button.trigger}}
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+        <ion-col *ngIf="!hide" col-12>
+            <ion-toolbar color="dark">
+                <ion-title>Shows: {{test.length}}</ion-title>
+                <ion-buttons end>
+                    <button (click)="refreshShows()" ion-button icon-only>
+                        <ion-icon name="refresh"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-row *ngFor="let button of test; let i = index" class="white">
+                <ion-col col-11>
+                    <button (click)="showItems(i)" ion-button full>{{button[0].name}}</button>
+                </ion-col>
+                <ion-col>
+                    <button (click)="deleteShow(i)" ion-button full float-right icon-only>
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+        <ion-col *ngIf="!hide" col-12>
+            <ion-toolbar color="dark">
+                <ion-title>Next Trigger: {{testTimer/1000 | number : '1.1-1'}}</ion-title>
+                <ion-buttons end>
+                    <button (click)="confirmPlay()" ion-button icon-only>
+                        <ion-icon name="play"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-list>
+                <ion-item *ngFor="let item of items" class="itemstyling">
+                    {{item.type}}
+                    {{ item.type == "Trigger" ? item.data.value : item.data.value/1000 + " sec" }}
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
 </ion-content>
